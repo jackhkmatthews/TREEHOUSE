@@ -1,16 +1,15 @@
-console.log('hi');
-
-const CELLS = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+const CELLS = ['.', '.', '.', '.', '.', '.', '.', '.', '.'];
 
 const Cell = React.createClass({
   propTypes: {
-    cell: React.PropTypes.number.isRequired,
+    cell: React.PropTypes.string.isRequired,
+    index: React.PropTypes.number.isRequired,
     onCellClick: React.PropTypes.func.isRequired,
   },
 
   render: function() {
     return (
-      <li className="gameboard__cell" onClick={this.props.onCellClick}>{this.props.cell}</li>
+      <li className="gameboard__cell" onClick={()=>this.props.onCellClick(this.props.index)}>{this.props.cell}</li>
     );
   }
 });
@@ -18,9 +17,9 @@ const Cell = React.createClass({
 function Scoreboard(props){
   return (
     <ul  className="gameboard">
-      {props.cells.map(cell => {
+      {props.cells.map((cell, index) => {
         return (
-          <Cell cell={cell} key={cell} onCellClick={props.onCellClick}/>
+          <Cell cell={cell} key={index} index={index} onCellClick={props.onCellClick}/>
         );
       })}
     </ul>
@@ -65,11 +64,20 @@ const Application = React.createClass({
     };
   },
 
-  onCellClick: function(){
-    console.log('clicked');
+  onReset: function(){
     this.setState({
-      xIsNext: !this.state.xIsNext
+      cells: ['.', '.', '.', '.', '.', '.', '.', '.', '.']
     });
+  },
+
+  onCellClick: function(index){
+    if (this.state.xIsNext) {
+      this.state.cells[index] = 'X';
+    } else {
+      this.state.cells[index] = 'O';
+    }
+    this.state.xIsNext = !this.state.xIsNext;
+    this.setState(this.state);
   },
 
   render: function(){
@@ -77,8 +85,10 @@ const Application = React.createClass({
       <div className="game">
         <Header title={this.state.title} />
         <TurnIndicator xIsNext={this.state.xIsNext}/>
-        <Scoreboard cells={this.state.cells} onCellClick={this.onCellClick}/>
-        <button className="game__reset">Reset</button>
+        <Scoreboard
+          cells={this.state.cells}
+          onCellClick={(index) => this.onCellClick(index)}/>
+        <button className="game__reset" onClick={this.onReset}>Reset</button>
       </div>
     );
   }
