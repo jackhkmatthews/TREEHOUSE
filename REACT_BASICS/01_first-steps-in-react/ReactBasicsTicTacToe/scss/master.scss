@@ -1,3 +1,4 @@
+//**************VARIABLES***************//
 
 //game variables
 $background-color: pink;
@@ -10,7 +11,7 @@ $cell-width: 100px;
 $gameboard-width: $number-of-cells-across * $cell-width;
 
 
-
+//******************GAME*****************//
 body {
   background-color: $background-color;
 }
@@ -20,6 +21,11 @@ body {
   text-align: center;
 }
 
+.game__reset {
+  padding: 30px;
+}
+
+//**************GAMEBOARD***************//
 .gameboard {
   background-color: $board-background-color;
   width: $gameboard-width;
@@ -35,8 +41,4 @@ body {
   box-sizing: border-box;
   border: 1px solid black;
   list-style: none;
-}
-
-.game__reset {
-  padding: 30px;
 }

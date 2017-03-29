@@ -5,6 +5,9 @@ body {
   background-color: grey;
   text-align: center; }
 
+.game__reset {
+  padding: 30px; }
+
 .gameboard {
   background-color: pink;
   width: 300px;
@@ -19,8 +22,5 @@ body {
   box-sizing: border-box;
   border: 1px solid black;
   list-style: none; }
-
-.game__reset {
-  padding: 30px; }
 
 /*# sourceMappingURL=master.css.map */
