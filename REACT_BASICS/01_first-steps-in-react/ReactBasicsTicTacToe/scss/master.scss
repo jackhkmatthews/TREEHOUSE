@@ -1,3 +1,42 @@
+
+//game variables
+$background-color: pink;
+$game-background-color: grey;
+$board-background-color: pink;
+
+//gameboard variables
+$number-of-cells-across: 3;
+$cell-width: 100px;
+$gameboard-width: $number-of-cells-across * $cell-width;
+
+
+
 body {
-  background-color: pink;
+  background-color: $background-color;
+}
+
+.game {
+  background-color: $game-background-color;
+  text-align: center;
+}
+
+.gameboard {
+  background-color: $board-background-color;
+  width: $gameboard-width;
+  height: $gameboard-width;
+  margin: 0 auto;
+  padding: 0;
+}
+
+.gameboard__cell {
+  height: $cell-width;
+  width: $cell-width;
+  float: left;
+  box-sizing: border-box;
+  border: 1px solid black;
+  list-style: none;
+}
+
+.game__reset {
+  padding: 30px;
 }
