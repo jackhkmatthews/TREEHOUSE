@@ -1,0 +1,17 @@
+<form (submit)="onSubmit()" #commentForm="ngForm" novalidate>
+  <div>
+    <label for="name" >Name</label>
+    <input type="text" name="name" [(ngModel)]="name" required minlength="3" #nameField="ngModel"/>
+    <div class="alert alert-danger" *ngIf="(nameField.dirty || nameField.touched) && nameField.errors">
+      <div [hidden]="!nameField.errors.required">Name is required</div>
+    </div>
+  </div>
+  <div>
+    <label for="comment">Comment</label>
+    <textarea name="comment" [(ngModel)]="comment" required minlength="3"></textarea>
+  </div>
+  <div>
+    <button>Submit</button>
+
+  </div>
+</form>
