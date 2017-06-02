@@ -1,20 +1,16 @@
 function checkForShip (player, coordinates) {
-  let hit = false;
-  let hitIndex;
+  let hitShip;
 
-  hit = player.ships.some((ship, index) => {
+  player.ships.some(ship => {
     return ship.locations.some(actualCoordinates => {
       if ((actualCoordinates[0] === coordinates[0]) && (actualCoordinates[1] === coordinates[1])) {
-        hitIndex = index;
+        hitShip = ship;
         return true
       }
     });
   });
 
-  console.log(hitIndex);
-
-  return hitIndex;
-
+  return hitShip ? hitShip : false;
 }
 
 function damageShip(ship, coordinates) {
@@ -23,8 +19,8 @@ function damageShip(ship, coordinates) {
 }
 
 function fireOnOponent(player, coordinates) {
-  hitIndex = checkForShip(player, coordinates);
-  if(hitIndex > -1) {damageShip(player.ships[hitIndex], coordinates)}
+  hitShip = checkForShip(player, coordinates);
+  if (hitShip) { damageShip(hitShip, coordinates) }
 }
 
 module.exports.checkForShip = checkForShip;
