@@ -96,7 +96,14 @@ describe('fireOnOponent', function(){
         }
       ]
     }
+  })
 
+  after(function() {
+    console.log('entire test suite completed');
+  })
+
+  afterEach(function(){
+    console.log('one test unit completed');
   })
 
   it('should check for hit on player and register damage on the first ship', function() {
