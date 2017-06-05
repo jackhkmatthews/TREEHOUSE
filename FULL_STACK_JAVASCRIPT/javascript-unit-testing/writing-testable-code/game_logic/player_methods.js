@@ -1,4 +1,5 @@
 var checkForShip = require('./ship_methods.js').checkForShip;
+var fire = require('./ship_methods.js').fire;
 
 function validateLocation (player, coordinates) {
   var x = coordinates[0];
@@ -31,14 +32,14 @@ function placeShip (player, ship, startingCoordinates, direction) {
     previousLocation = proposedLocations[i - 1] || [];
     rowNumber = previousLocation[0];
     columnNumber = previousLocation[1];
-    
+
     proposedLocations[i] = (i === 0)
       ? startingCoordinates
       : (direction === 'horizontal')
         ? [rowNumber, ++columnNumber]
         : [++rowNumber, columnNumber];
   }
-  
+
   if (validateLocations(player, proposedLocations)) {
     ship.locations = proposedLocations;
   } else {
@@ -46,9 +47,13 @@ function placeShip (player, ship, startingCoordinates, direction) {
   }
 }
 
+function randomCoordinate(){
+  return Math.floor(Math.random() * 9)
+}
+
 function computerFire (player) {
-  var x = Math.floor(Math.random() * 9);
-  var y = Math.floor(Math.random() * 9);
+  var x = randomCoordinate();
+  var y = randomCoordinate();
   var coordinates = [x, y];
 
   fire(player, coordinates);
@@ -69,5 +74,6 @@ module.exports = {
   validateLocations: validateLocations,
   validateLocation: validateLocation,
   computerPlaceShip: computerPlaceShip,
-  computerFire: computerFire
+  computerFire: computerFire,
+  randomCoordinate: randomCoordinate
 };
