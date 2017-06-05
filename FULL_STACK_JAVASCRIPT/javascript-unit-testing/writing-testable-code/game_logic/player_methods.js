@@ -36,8 +36,8 @@ function placeShip (player, ship, startingCoordinates, direction) {
     proposedLocations[i] = (i === 0)
       ? startingCoordinates
       : (direction === 'horizontal')
-        ? [rowNumber, ++columnNumber]
-        : [++rowNumber, columnNumber];
+      ? [rowNumber, ++columnNumber]
+      : [++rowNumber, columnNumber];
   }
 
   if (validateLocations(player, proposedLocations)) {
@@ -59,12 +59,14 @@ function computerFire (player) {
   fire(player, coordinates);
 }
 
+function randomDirection(){
+  return Math.random() > 0.5 ? 'horizontal' : 'vertical';
+}
+
 function computerPlaceShip (player, ship) {
-  var direction = Math.random() > 0.5
-    ? 'horizontal'
-    : 'vertical';
-  var x = Math.floor(Math.random() * 9);
-  var y = Math.floor(Math.random() * 9);
+  var direction = randomDirection();
+  var x = randomCoordinate();
+  var y = randomCoordinate();
   var coordinates = [x, y];
   placeShip(player, ship, coordinates, direction);
 }
@@ -75,5 +77,6 @@ module.exports = {
   validateLocation: validateLocation,
   computerPlaceShip: computerPlaceShip,
   computerFire: computerFire,
-  randomCoordinate: randomCoordinate
+  randomCoordinate: randomCoordinate,
+  randomDirection: randomDirection
 };

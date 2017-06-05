@@ -118,25 +118,12 @@ describe('COMPUTER PLAYER', function () {
     });
   });
 
-  describe('computerFire', function () {
-    var computerFire = require('../game_logic/player_methods').computerFire;
-    var player;
+  describe('randomDirection', function() {
+    var randomDirection = require('../game_logic/player_methods.js').randomDirection;
+    it('should produce a random direction string', function() {
+      expect(randomDirection()).to.be.a('string');
+      expect(randomDirection()).to.be.oneOf(['horizontal', 'vertical']);
+    })
+  })
 
-    beforeEach(function () {
-      player = {
-        ships: [
-          {
-            locations: [[9, 9]]
-          }
-        ]
-      };
-    });
-
-    it('should aim at a random location', function () {
-      var ship = player.ships[0];
-
-      computerFire(player);
-//      expect(ship).to.......
-    });
-  });
 });
